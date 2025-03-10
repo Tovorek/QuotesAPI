@@ -1,0 +1,19 @@
+.myInputs{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+#upLvTitle{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+}
+.actionButtons{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.mat-mdc-dialog-surface {
+    height: 90% !important;
+}

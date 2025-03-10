@@ -1,0 +1,54 @@
+<div class="mb-4">
+  <ul class="tab-group">
+      <li class="tab inactive"><a routerLink="/login">Login</a></li>
+      <li class="tab active"><a routerLink="/register">Register</a></li>                            
+    </ul>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="userName">
+      </mat-form-field>
+        <!-- <input class="form-control bg-body-secondary" placeholder="Username" formControlName="userName"> -->
+        <div class="error-feedback" *ngIf="hasDisplayableError('userName') && form.controls.userName.hasError('required')">
+            Please enter User Name.
+          </div>
+    </div>
+    <div class="mb-3">
+        <!-- <input class="form-control bg-body-secondary" placeholder="Password" formControlName="password"> -->
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password">
+        </mat-form-field>
+        <div class="error-feedback" *ngIf="hasDisplayableError('password')">
+            <ng-container [ngSwitch]="form.controls.password.errors | firstKey"> 
+              <div *ngSwitchCase="'required'">
+                Please enter Password.
+              </div>
+              <div *ngSwitchCase="'minlength'">
+                At least 6 characters are required.
+              </div>
+              <div *ngSwitchCase="'pattern'">
+                One or more special character(s) required.
+              </div>
+            </ng-container>                
+          </div>
+
+    </div>
+    <div class="mb-3">
+        <!-- <input class="form-control bg-body-secondary" placeholder="Confirm Password" formControlName="confirmPass"> -->
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput formControlName="confirmPass">
+        </mat-form-field>
+        <div class="error-feedback" *ngIf="hasDisplayableError('confirmPass') && form.controls.confirmPass.hasError('passwordMismatch')">
+            Password doesn't match.
+          </div>
+    </div>
+    <div class="mt-4">
+        <button type="submit" [disabled]="form.invalid" class="btn normal-btn">
+            Register
+        </button>
+    </div>
+</form>

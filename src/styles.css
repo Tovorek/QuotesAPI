@@ -1,0 +1,22 @@
+
+body {
+    font-family: "Nunito", sans-serif;
+}
+
+.error-feedback{
+    font-size: 0.9rem;
+    color: crimson;
+    margin: 0.3rem !important;
+    margin-top: 0.1rem !important;
+}
+html, body { height: 100%;  }
+
+:root {
+    --mat-form-field-container-height: 40px;
+    --mat-form-field-container-vertical-padding: 8px;
+  }
+
+  .bg-primary-subtle{
+    background-color: white !important;
+  }
+  

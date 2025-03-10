@@ -1,0 +1,58 @@
+<h4 style="background-color: #3e50b5;color: white;padding: 10px;margin-right: 22px;" id="upLvTitle">Add New Quote</h4>
+<div id="createForm">    
+    
+    <div style="padding: 10px;">        
+        <form [formGroup]="quoteUpdateForm" (ngSubmit)="OnCreate()" class="myForm">
+        <div class="myInputs">
+            <div class="mb-3">
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Quote ID</mat-label>
+                    <input matInput formControlName="no" readonly="true">
+                </mat-form-field>  
+            </div>      
+            <div class="mb-3">    
+            <mat-form-field style="width: 100%;">
+                <mat-label>Quote Type</mat-label>
+                <mat-select formControlName="quoteType">
+                  <mat-option value="auto">Auto</mat-option>
+                  <mat-option value="house">House</mat-option>
+                  <mat-option value="boat">Boat</mat-option>
+                </mat-select>
+            </mat-form-field>
+            </div> 
+            <div class="mb-3">           
+            <mat-form-field style="width: 100%;">
+                <mat-label>Sales</mat-label>
+                <input matInput formControlName="sales">
+            </mat-form-field>
+            </div>   
+            <div class="mb-3">          
+            <mat-form-field style="width: 100%;">
+                <mat-label>Premium</mat-label>
+                <input matInput formControlName="premium">
+            </mat-form-field>
+            </div>   
+            <div class="mb-3">   
+            <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Due Date</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="dueDate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker1">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            </div>
+            <div class="mb-3"> 
+            <mat-form-field style="width: 100%;">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description">
+            </mat-form-field>
+            </div>
+
+        </div>
+        <button type="button" class="actionButtons" mat-raised-button mat-dialog-close color="warn">Cancel</button>
+        <button type="submit" mat-flat-button color="primary" [disabled]="quoteUpdateForm.invalid">Submit</button>
+            
+        </form>
+    </div>
+</div>

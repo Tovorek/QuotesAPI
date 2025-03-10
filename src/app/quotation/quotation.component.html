@@ -1,0 +1,69 @@
+<div class="row col-md-12" style="margin-left: 0px;background: #d2d3d2;margin-bottom: 3px;">
+    <div class="col-md-6"><h5>Task Details</h5></div>
+    <div class="col-md-6">
+        <button style="height: 32px;font-size: 12px;float: right;color: white;background-color: #11c59f;border: 1px solid #11c59f;" class="btn btn-dark" (click)="onAddTask()">
+            Add Task
+        </button>
+    </div>
+</div>
+
+<div class="row col-md-12">
+    <div class="col-md-4">
+        <span>Order by: </span>
+        <select>
+            <option>Quote ID</option>
+            <option>Quote Type</option>
+            <option>Sales</option>
+        </select>
+        <span>Descending</span>
+    </div>
+    
+    <div class="col-md-4">
+        <span>Search </span><input placeholder="search" style="margin-left: 0px;max-width: 150px;" (keyup)="onSearch($event)"> 
+    </div>
+</div>
+
+<div *ngIf="isLoading" class="text-center p-3">
+    <p>Loading quotes...</p>
+</div>
+
+<table *ngIf="!isLoading" class="tblMain" mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="no">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.no}} </td>
+    </ng-container>
+    <ng-container matColumnDef="quoteType">
+        <th mat-header-cell *matHeaderCellDef> Quote Type </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.quoteType}} </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.description}} </td>
+    </ng-container>
+    <ng-container matColumnDef="sales">
+        <th mat-header-cell *matHeaderCellDef> Sales </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.sales}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dueDate">
+        <th mat-header-cell *matHeaderCellDef> Due Date </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.dueDate | date:'MM/dd/yyyy'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="premium">
+        <th mat-header-cell *matHeaderCellDef> Premium </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.premium | currency:'USD':'symbol':'1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let quote">
+            <mat-icon style="cursor: pointer;margin-right: 8px;" matTooltip="view" (click)="viewRow(quote)">visibility</mat-icon>
+            <mat-icon style="cursor: pointer;margin-right: 8px;" matTooltip="edit" (click)="editRow(quote)">edit</mat-icon>
+            <mat-icon style="cursor: pointer;margin-right: 8px;" matTooltip="delete" (click)="deleteRow(quote)">delete</mat-icon>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+</table>
+
+<mat-paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page">
+</mat-paginator>
